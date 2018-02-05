@@ -12,4 +12,4 @@
 */
 
 
-Route::get('/', 'SystemCssController@generateCss')->name('home');
+Route::get('/{id}', 'SystemCssController@generateCss')->name('home');

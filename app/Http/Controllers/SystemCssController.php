@@ -16,7 +16,7 @@ class SystemCssController extends Controller
         $this->middleware('guest');
     }
 
-    public function generateCss()
+    public function generateCss($galaxyId)
     {
         $object = GalaxyHasSystemObjects::join('system_object', 'galaxy_has_system_object.system_object_id', '=', 'system_object.id')
             ->join('system_object_size', 'system_object.size', '=', 'system_object_size.id')
@@ -42,9 +42,9 @@ class SystemCssController extends Controller
             $css .= '}';
 
             if ($value->order != 0){
-                $css .= $value->generateObjectKeyFrameCss(1);
+                $css .= $value->generateObjectKeyFrameCss($galaxyId);
                 if($value->type == 'planet'){
-                    $css .= $value->generateObjectOrbiteCss(1);
+                    $css .= $value->generateObjectOrbiteCss($galaxyId);
                 }
             }
         }
