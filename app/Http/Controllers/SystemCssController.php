@@ -29,7 +29,8 @@ class SystemCssController extends Controller
             height: '.$object[0]->getGalaxyLenght().'px;
             width: '.$object[0]->getGalaxyLenght().'px;
             background-color: #000;
-            display: block; }';
+            display: block;
+        transform: skewX(-25deg);}';
 
         foreach ($object as $value) {
             $css .= '#' . $value->name . '{';

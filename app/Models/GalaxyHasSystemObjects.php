@@ -26,13 +26,16 @@ class GalaxyHasSystemObjects extends Model
             case 'planet':
                 return 'position: absolute;
                     border-radius: 50%;
-                    z-index: 2;';
+                    z-index: 2;
+                    transform: skewX(-50deg);';
                 break;
 
             case 'star':
                 return 'position: absolute;
                     border-radius: 50%;
-                    z-index: 2;';
+                    z-index: 2;
+                    transform: skewX(+25deg);';
+
                 break;
 
             default:
