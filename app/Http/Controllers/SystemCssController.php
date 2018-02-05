@@ -24,11 +24,10 @@ class SystemCssController extends Controller
             ->join('system_object_color', 'system_object.color', '=', 'system_object_color.id')
             ->select('galaxy_has_system_object.order','system_object.name', 'system_object_size.name as size_name','system_object_size.size', 'system_object_color.code_hexadecimal', 'system_object_color.code_nuance', 'system_object_type.name as type')
             ->get();
-
         $css = 'body {  background-color: #000; }';
         $css .= '#galaxy {
-            height: 800px;
-            width: 800px;
+            height: '.$object[0]->getGalaxyLenght().'px;
+            width: '.$object[0]->getGalaxyLenght().'px;
             background-color: #000;
             display: block; }';
 
@@ -44,11 +43,14 @@ class SystemCssController extends Controller
 
             if ($value->order != 0){
                 $css .= $value->generateObjectKeyFrameCss(1);
+                if($value->type == 'planet'){
+                    $css .= $value->generateObjectOrbiteCss(1);
+                }
             }
         }
 
         return view('generate', [
-            'objects' => SystemObject::get(),
+            'objects' => $object,
             'css' => $css
         ]);
 

@@ -12,7 +12,12 @@ class GalaxyHasSystemObjects extends Model
         'system_object_id', 'galaxy_id', 'order'
     ];
 
-    protected $galaxyLenght = 800;
+    protected $galaxyLenght = 600;
+
+    public function getGalaxyLenght()
+    {
+        return $this->galaxyLenght;
+    }
 
     public function generateObjectTypeCss()
     {
@@ -20,12 +25,14 @@ class GalaxyHasSystemObjects extends Model
         switch ($this->type) {
             case 'planet':
                 return 'position: absolute;
-                    border-radius: 50%;';
+                    border-radius: 50%;
+                    z-index: 2;';
                 break;
 
             case 'star':
                 return 'position: absolute;
-                    border-radius: 50%;';
+                    border-radius: 50%;
+                    z-index: 2;';
                 break;
 
             default:
@@ -78,6 +85,32 @@ class GalaxyHasSystemObjects extends Model
           to {
             transform: rotate(360deg) translateY(-'.$lenght.'px); } }';
     }
+
+    public function generateObjectOrbiteCss($galaxyId)
+    {
+        $system = GalaxyHasSystemObjects::where('galaxy_id', '=', $galaxyId)
+            ->join('system_object', 'galaxy_has_system_object.system_object_id', '=', 'system_object.id')
+            ->join('system_object_size', 'system_object.size', '=', 'system_object_size.id')
+            ->select('galaxy_has_system_object.order', 'system_object_size.size', 'system_object.space')
+            ->get();
+        $lenght = 0;
+        for ($i=0; $i < $this->order + 1 ; $i++) {
+            $lenght += $system[$i]->size + $system[$i]->space;
+        }
+
+        return '#orbit-'.$this->name.' {
+              position: absolute;
+              width: '.$lenght * 2  .'px;
+              height: '.$lenght * 2 .'px;
+              border-radius: 50%;
+              border: 1px solid #50848f;
+              margin-left: '.($this->galaxyLenght - $lenght * 2 ) /2  .'px;
+              margin-top: '.($this->galaxyLenght - $lenght * 2 ) /2 .'px;
+              transition: 0.5s ease-in-out;
+              z-index: 1;}';
+    }
+
+
 
 
 }

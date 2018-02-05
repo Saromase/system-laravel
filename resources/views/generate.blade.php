@@ -14,6 +14,9 @@
         <div id="galaxy">
             @foreach ($objects as $value)
                 <div id="{{$value->name}}"></div>
+                @if ($value->type == 'planet')
+                    <div id="orbit-{{$value->name}}"></div>
+                @endif
             @endforeach
         </div>
     </body>
