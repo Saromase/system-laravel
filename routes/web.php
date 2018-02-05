@@ -11,13 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-
-Route::get('/generate', function () {
-    return view('generate');
-});
-
-Route::get('/tutu', 'SystemCssController@generateCss')->name('tutu');
+Route::get('/', 'SystemCssController@generateCss')->name('home');

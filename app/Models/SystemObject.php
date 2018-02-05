@@ -9,6 +9,7 @@ class SystemObject extends Model
     protected $table = 'system_object';
 
     protected $fillable = [
-        'name', 'size', 'type', 'color'
+        'name', 'size', 'type', 'color', 'space'
     ];
+
 }

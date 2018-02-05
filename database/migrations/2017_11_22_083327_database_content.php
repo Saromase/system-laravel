@@ -66,6 +66,16 @@ class DatabaseContent extends Migration
             $table->foreign('type')->references('id')->on('system_object_type');
             $table->integer('color')->unsigned();
             $table->foreign('color')->references('id')->on('system_object_color');
+            $table->integer('space');
+            $table->timestamps();
+        });
+
+        Schema::connection($connection)->create('galaxy_has_system_object', function (Blueprint $table) {
+            $table->integer('system_object_id')->unsigned();
+            $table->foreign('system_object_id')->references('id')->on('system_object');
+            $table->integer('galaxy_id')->unsigned();
+            $table->foreign('galaxy_id')->references('id')->on('galaxy');
+            $table->integer('order');
             $table->timestamps();
         });
     }
