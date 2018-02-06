@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SystemObjectTypeSeeder::class);
         $this->call(SystemObjectSizeSeeder::class);
         $this->call(SystemObjectColorSeeder::class);
+        $this->call(GalaxySeeder::class);
     }
 }
