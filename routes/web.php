@@ -12,4 +12,6 @@
 */
 
 
-Route::get('/{id}', 'SystemCssController@generateCss')->name('home');
+Route::get('/sytem/{id}', 'SystemCssController@generateCss')->name('system');
+
+Route::get('/', 'SystemCssController@homepage')->name('home');

@@ -56,4 +56,9 @@ class SystemCssController extends Controller
         ]);
 
     }
+
+    public function homepage()
+    {
+        return view('welcome');
+    }
 }
